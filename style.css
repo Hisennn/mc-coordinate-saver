@@ -1,0 +1,460 @@
+@font-face {
+font-family: 'Monocraft';
+src: url('fonts/Monocraft.woff2') format('woff2'),
+      url('fonts/Monocraft.woff') format('woff');
+font-weight: normal;
+font-style: normal;
+}
+
+@import url('/reset.css');
+body {
+  font-family: 'Monocraft', monospace;
+  background-color: white;
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 4%;
+  height: 96vh;
+  gap: 30px;
+  display: flex;
+  flex-direction: column;
+}
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.site-title {
+  text-transform: uppercase;
+  font-size: 2.4rem;
+  font-weight: 900;
+  text-align: center;
+}
+
+.add-section {
+  background: #f5f5f5;
+  padding: 10px;
+  border: 2px solid #888;
+  margin-bottom: 30px;
+}
+
+.input-row {
+  display: flex;
+  gap: 15px;
+  margin-bottom: 15px;
+  align-items: flex-end;
+  flex-wrap: wrap;
+}
+
+.input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.input-group > input::placeholder {
+color: #bbb;
+}
+
+.input-group label {
+  font-size: 1.125rem;
+  color: #333;
+}
+input[type="text"] {
+width: 240px !important;
+}
+
+input[type="text"], input[type="number"] {
+  font-family: 'Monocraft', monospace;
+  font-size: 1.1rem;
+  padding: 8px;
+  border: 2px solid #888;
+  background: white;
+  outline: none;
+  width: 120px;
+}
+
+input[type="text"]:focus, input[type="number"]:focus {
+  border-color: #2196F3;
+  box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+.color-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 15px;
+}
+
+.color-row label {
+  font-size: 1rem;
+  color: #333;
+}
+
+.color-options {
+  display: flex;
+  gap: 8px;
+}
+
+.color-option {
+  width: 25px;
+  height: 25px;
+  border: 2px solid #888;
+  cursor: pointer;
+}
+
+.color-option:hover {
+  transform: scale(1.2);
+}
+
+.color-option.active {
+  border-color: #333;
+  border-width: 3px;
+  transform: scale(1.2);
+}
+
+.add-btn {
+  font-family: 'Monocraft', monospace;
+  font-size: 1.1rem;
+  padding: 10px 20px;
+  background: #4CAF50;
+  color: white;
+  border: 2px solid #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.add-btn:hover {
+  background: #245326;
+}
+
+.add-btn:active {
+  transform: translateY(2px);
+}
+
+.list-section {
+  border: 2px solid #888;
+}
+
+.list-header {
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr 1fr 2fr;
+  background: #333;
+  color: white;
+  padding: 15px;
+  font-size: 1.125rem;
+}
+
+.header-name, .header-coord, .header-actions {
+  text-align: center;
+}
+
+.coords-list {
+  background: white;
+}
+
+.coord-item {
+  display: grid;
+  grid-template-columns: 5fr 1fr 1fr 1fr 2fr;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+  border-left: 8px solid;
+}
+
+.coord-item:last-child {
+  border-bottom: none;
+}
+
+.coord-name {
+  font-size: 1.1rem;
+  padding-left: 10px;
+  padding-right: 20px;
+}
+
+.coord-value {
+  text-align: center;
+  font-size: 1.1rem;
+  font-weight: 500 !important;
+}
+
+.coord-value.empty {
+  color: #999;
+  font-style: italic;
+}
+
+.coord-actions {
+  display: flex;
+  gap: 4px;
+  justify-content: center;
+}
+
+.edit-btn, .delete-btn {
+  font-family: 'Monocraft', monospace;
+  font-size: 0.825rem;
+  padding: 5px 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.edit-btn {
+  background: #2196F3;
+  color: white;
+}
+
+.edit-btn:hover {
+  background: #1976D2;
+}
+
+.delete-btn {
+  background: #F44336;
+  color: white;
+}
+
+.delete-btn:hover {
+  background: #D32F2F;
+}
+
+.edit-mode {
+  background: #fff3cd !important;
+}
+
+.edit-mode input[type="text"], .edit-mode input[type="number"] {
+  width: 80px;
+  font-size: 0.875rem;
+  padding: 4px;
+}
+
+.save-btn, .cancel-btn {
+  font-family: 'Monocraft', monospace;
+  font-size: 0.875rem;
+  padding: 5px 8px;
+  border: 1px solid #333;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.save-btn {
+  background: #4CAF50;
+  color: white;
+}
+
+.save-btn:hover {
+  background: #45a049;
+}
+
+.cancel-btn {
+  background: #999;
+  color: white;
+}
+
+.cancel-btn:hover {
+  background: #777;
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #aaa;
+  font-size: 0.7rem;
+}
+
+.footer-content {
+  text-align: center;
+  font-size: 0.55rem;
+  color: #888;
+  margin-top: auto;
+  line-height: 1.1;
+}
+.footer-content p {
+color: #444;
+font-size: 0.655rem;
+margin-bottom: 12px;
+}
+.footer-content a {
+  color: #2196F3;
+  text-decoration: underline;
+}
+
+@media (max-width: 1024px) {
+.container {
+  max-width: 95%;
+  padding: 0 10px;
+}
+
+.list-header {
+  grid-template-columns: 4fr 1fr 1fr 1fr 2fr;
+}
+
+.coord-item {
+  grid-template-columns: 4fr 1fr 1fr 1fr 2fr;
+}
+
+.coord-name {
+  padding-left: 5px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+.coord-actions {
+  gap: 4px;
+}
+
+.edit-btn, .delete-btn {
+  font-size: 0.75rem;
+  padding: 4px 6px;
+}
+}
+
+@media (max-width: 768px) {
+.input-row {
+  flex-direction: column;
+  align-items: start;
+  gap: 15px;
+}
+
+input[type="text"] {
+  width: 100%;
+  max-width: 300px;
+}
+
+input[type="number"] {
+  width: 100px;
+}
+
+.list-section {
+  overflow-x: auto;
+}
+
+.list-header {
+  grid-template-columns: 3fr 1fr 1fr 1fr 2fr;
+  min-width: 460px;
+}
+
+.coord-item {
+  grid-template-columns: 3fr 1fr 1fr 1fr 2fr;
+  min-width: 460px;
+  border-left: 6px solid;
+}
+
+.coord-name {
+  font-size: 0.875rem;
+  padding-left: 5px;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  max-width: 150px;
+}
+
+.coord-value {
+  font-size: 0.85rem;
+}
+
+.coord-actions {
+  gap: 3px;
+  flex-direction: column;
+  align-items: center;
+}
+
+.edit-btn, .delete-btn {
+  font-size: 0.5rem;
+  padding: 3px 5px;
+  width: 50px;
+}
+
+.save-btn, .cancel-btn {
+  font-size: 0.5rem;
+  padding: 3px 5px;
+  width: 45px;
+}
+
+.edit-mode input[type="text"] {
+  width: 140px;
+  font-size: 0.85rem;
+}
+
+.edit-mode input[type="number"] {
+  width: 60px;
+  font-size: 0.8rem;
+}
+}
+
+@media (max-width: 480px) {
+body {
+  padding: 10px;
+  font-size: 0.8rem;
+}
+.site-title {
+  font-size: 1.2rem;
+}
+
+
+.add-section {
+  padding: 15px;
+}
+
+.input-group label {
+  font-size: 0.9rem;
+}
+
+input[type="text"], input[type="number"] {
+  font-size: 0.9rem;
+  padding: 6px;
+}
+
+.color-row {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 10px;
+}
+
+.add-btn {
+  font-size: 0.85rem;
+  padding: 8px 16px;
+}
+
+.list-header {
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  min-width: 400px;
+  font-size: 0.7rem;
+  padding: 10px;
+}
+
+.coord-item {
+  grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+  min-width: 400px;
+  padding: 10px;
+}
+
+.coord-name {
+  font-size: 0.8rem;
+  max-width: 120px;
+}
+
+.coord-value {
+  font-size: 0.75rem;
+}
+
+.edit-btn, .delete-btn {
+  font-size: 0.4rem;
+  padding: 2px 4px;
+  width: 35px;
+}
+
+.save-btn, .cancel-btn {
+  font-size: 0.4rem;
+  padding: 2px 4px;
+  width: 35px;
+}
+
+.edit-mode input[type="text"] {
+  width: 110px;
+  font-size: 0.7rem;
+}
+
+.edit-mode input[type="number"] {
+  width: 50px;
+  font-size: 0.7rem;
+}
+}
