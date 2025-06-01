@@ -56,6 +56,11 @@ body {
 .input-group > input::placeholder {
 color: #bbb;
 }
+.opt-label {
+  font-size: 0.65rem;
+  color: #888;
+  margin-bottom: 5px;
+}
 
 .input-group label {
   font-size: 1.125rem;
