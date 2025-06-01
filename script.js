@@ -32,7 +32,6 @@ nameInput.addEventListener('input', (e) => {
     }
 });
 
-
 function limitNumber(input, min, max) {
     input.addEventListener('input', (e) => {
         let value = parseInt(e.target.value);
@@ -129,6 +128,38 @@ function saveEdit(id) {
     renderList();
 }
 
+async function copyToClipboard(coord) {
+    if (coord.y === null) return;
+
+    const tpCommand = `/tp ${coord.x} ${coord.y} ${coord.z}`;
+    
+    try {
+        await navigator.clipboard.writeText(tpCommand);
+        
+        // Visual feedback
+        const button = document.querySelector(`[data-coord-id="${coord.id}"] .copy-btn`);
+        const originalText = button.textContent;
+        button.textContent = 'COPIED!';
+        button.classList.add('copied');
+        
+        setTimeout(() => {
+            button.textContent = originalText;
+            button.classList.remove('copied');
+        }, 1500);
+        
+    } catch (err) {
+        // Fallback for older browsers
+        const textArea = document.createElement('textarea');
+        textArea.value = tpCommand;
+        document.body.appendChild(textArea);
+        textArea.select();
+        document.execCommand('copy');
+        document.body.removeChild(textArea);
+        
+        alert('Command copied to clipboard!');
+    }
+}
+
 function renderList() {
     if (coords.length === 0) {
         coordsList.innerHTML = '<div class="empty-state">No coordinates saved yet.</div>';
@@ -137,11 +168,12 @@ function renderList() {
 
     coordsList.innerHTML = coords.map(coord => {
         const isEditing = editingId === coord.id;
+        const hasY = coord.y !== null;
         
         if (isEditing) {
             return `
                 <div class="coord-item edit-mode" data-id="${coord.id}" style="border-left-color: ${coord.color}">
-                    <div class="coord-name">
+                    <div class="coord-name-section">
                         <input type="text" class="edit-name" value="${coord.name}">
                     </div>
                     <div class="coord-value">
@@ -162,8 +194,15 @@ function renderList() {
         }
         
         return `
-            <div class="coord-item" data-id="${coord.id}" style="border-left-color: ${coord.color}">
-                <div class="coord-name">${coord.name}</div>
+            <div class="coord-item" data-id="${coord.id}" data-coord-id="${coord.id}" style="border-left-color: ${coord.color}">
+                <div class="coord-name-section">
+                    <div class="coord-name">${coord.name}</div>
+                    <button class="copy-btn" 
+                            onclick="copyToClipboard({id: ${coord.id}, x: ${coord.x}, y: ${coord.y}, z: ${coord.z}})"
+                            ${!hasY ? 'disabled' : ''}>
+                        ${hasY ? 'COPY /tp' : 'COPY /tp'}
+                    </button>
+                </div>
                 <div class="coord-value">${coord.x}</div>
                 <div class="coord-value ${coord.y === null ? 'empty' : ''}">${coord.y !== null ? coord.y : '---'}</div>
                 <div class="coord-value">${coord.z}</div>
